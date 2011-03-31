@@ -3,7 +3,6 @@ package fowler.energybilling;
 import java.util.Date;
 
 public class DisabilitySite extends Site {
-	private Reading[] _readings = new Reading[1000];
 	private static final Dollars FUEL_TAX_CAP = new Dollars(0.10);
 	private static final double TAX_RATE = 0.05;
 	private Zone _zone; // zone must be initialized!!!

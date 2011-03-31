@@ -5,6 +5,9 @@ import java.util.Date;
 
 public class Site {
 
+	protected int lastReading;
+	protected Reading[] _readings = new Reading[1000];
+
 	public Site() {
 		super();
 	}
