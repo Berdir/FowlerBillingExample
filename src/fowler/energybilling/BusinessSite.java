@@ -1,6 +1,6 @@
 package fowler.energybilling;
 
-public class BusinessSite {
+public class BusinessSite extends Site {
 	private int lastReading;
 	private Reading[] _readings = new Reading[1000];
 	private static final double START_RATE = 0.09;

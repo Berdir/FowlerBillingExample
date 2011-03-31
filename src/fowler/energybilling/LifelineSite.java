@@ -1,6 +1,6 @@
 package fowler.energybilling;
 
-public class LifelineSite {
+public class LifelineSite extends Site {
 	private Reading[] _readings = new Reading[1000];
 	private static final double TAX_RATE = 0.05;
 

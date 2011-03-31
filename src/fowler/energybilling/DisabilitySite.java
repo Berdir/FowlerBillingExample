@@ -1,9 +1,8 @@
 package fowler.energybilling;
 
-import java.util.Calendar;
 import java.util.Date;
 
-public class DisabilitySite {
+public class DisabilitySite extends Site {
 	private Reading[] _readings = new Reading[1000];
 	private static final Dollars FUEL_TAX_CAP = new Dollars(0.10);
 	private static final double TAX_RATE = 0.05;
@@ -67,12 +66,6 @@ public class DisabilitySite {
 		result = new Dollars(result.plus(fuel.times(TAX_RATE).min(FUEL_TAX_CAP)));
 		result = result.round(2);
 		return result;
-	}
-
-	int dayOfYear(Date arg) {
-		Calendar c = Calendar.getInstance();
-		c.setTime(arg);
-		return c.get(Calendar.DAY_OF_YEAR);
 	}
 
 }
