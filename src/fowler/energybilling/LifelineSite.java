@@ -1,21 +1,10 @@
 package fowler.energybilling;
 
-public class LifelineSite extends Site {
+public class LifelineSite extends GenericSite {
 	private static final double TAX_RATE = 0.05;
 
-	public void addReading(Reading newReading) {
-		Reading[] newArray = new Reading[_readings.length + 1];
-		System.arraycopy(_readings, 0, newArray, 1, _readings.length);
-		newArray[0] = newReading;
-		_readings = newArray;
-	}
-
-	public Dollars charge() {
-		int usage = _readings[0].amount() - _readings[1].amount();
-		return charge(usage);
-	}
-
-	private Dollars charge (int usage) {
+	@Override
+	protected Dollars charge (int usage) {
  		double base = Math.min(usage,100) * 0.03;
 		if (usage > 100) {
 		base += (Math.min (usage,200) - 100) * 0.05;

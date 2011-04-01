@@ -1,21 +1,11 @@
 package fowler.energybilling;
 
-public class BusinessSite extends Site {
+public class BusinessSite extends GenericSite {
 	private static final double START_RATE = 0.09;
 	static final double END_RATE = 0.05;
 	static final int END_AMOUNT = 1000;
 
-	public void addReading(Reading newReading) {
-		_readings[++lastReading] = newReading;
-	}
-
-	public Dollars charge() {
-		int usage = _readings[lastReading].amount()
-				- _readings[lastReading - 1].amount();
-		return charge(usage);
-	}
-
-	private Dollars charge(int usage) {
+	protected Dollars charge(int usage) {
 		Dollars result;
 		if (usage == 0)
 			return new Dollars(0);
