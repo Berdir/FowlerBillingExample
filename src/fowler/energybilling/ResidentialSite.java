@@ -2,7 +2,7 @@ package fowler.energybilling;
 
 import java.util.Date;
 
-public class ResidentialSite extends Site {
+public class ResidentialSite extends TimedSite {
 
 	private static final double TAX_RATE = 0.05;
 	private Zone _zone;
@@ -11,27 +11,7 @@ public class ResidentialSite extends Site {
 		_zone = zone;
 	}
 
-	public void addReading(Reading newReading) {
-		// add reading to end of array
-		int i = 0;
-		while (_readings[i] != null)
-			i++;
-		_readings[i] = newReading;
-	}
-
-	public Dollars charge() {
-		// find last reading
-		int i = 0;
-		while (_readings[i] != null)
-			i++;
-		int usage = _readings[i - 1].amount() - _readings[i - 2].amount();
-		Date end = _readings[i - 1].date();
-		Date start = _readings[i - 2].date();
-		start.setDate(start.getDate() + 1); // set to begining of period
-		return charge(usage, start, end);
-	}
-
-	private Dollars charge(int usage, Date start, Date end) {
+	protected Dollars charge(int usage, Date start, Date end) {
 		Dollars result;
 		double summerFraction;
 		// Find out how much of period is in the summer

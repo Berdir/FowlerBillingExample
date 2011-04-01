@@ -2,7 +2,7 @@ package fowler.energybilling;
 
 import java.util.Date;
 
-public class DisabilitySite extends Site {
+public class DisabilitySite extends TimedSite {
 	private static final Dollars FUEL_TAX_CAP = new Dollars(0.10);
 	private static final double TAX_RATE = 0.05;
 	private Zone _zone; // zone must be initialized!!!
@@ -13,25 +13,8 @@ public class DisabilitySite extends Site {
 
 	}
 
-	public void addReading(Reading newReading) {
-		int i;
-		for (i = 0; _readings[i] != null; i++);
-		_readings[i] = newReading;
-	}
-
-	// JK: usage and date calculation seem to be ok
-	public Dollars charge() {
-		int i;
-		for (i = 0; _readings[i] != null; i++);
-		// JK i - 1 is the last reading, i-2 the one before
-		int usage = _readings[i - 1].amount() - _readings[i - 2].amount();
-		Date end = _readings[i - 1].date();
-		Date start = _readings[i - 2].date();
-		start.setDate(start.getDate() + 1); // set to beginning of period
-		return charge(usage, start, end);
-	}
-
-	private Dollars charge(int fullUsage, Date start, Date end) {
+	@Override
+	protected Dollars charge(int fullUsage, Date start, Date end) {
 		Dollars result;
 		double summerFraction;
 		// JK: don't charge more than the CAP (which is set to 200)

@@ -161,7 +161,7 @@ public class EngergyBillingTests {
 	
 	@Test
 	public void DisabilitySite0() {
-		DisabilitySite subject = new DisabilitySite(Registry.get("A"));
+		TimedSite subject = new DisabilitySite(Registry.get("A"));
 		subject.addReading(new Reading(10, new Date(1997, 1, 1)));
 		subject.addReading(new Reading(10, new Date(1997, 2, 1)));
 		assertTrue(subject.charge().getAmount() == 0.0);
@@ -173,7 +173,7 @@ public class EngergyBillingTests {
 	
 	@Test
 	public void DisabilitySite199Winter() {
-		DisabilitySite subject = new DisabilitySite(Registry.get("A"));
+		TimedSite subject = new DisabilitySite(Registry.get("A"));
 		subject.addReading(new Reading(100, new Date(1997, 1, 1)));
 		subject.addReading(new Reading(299, new Date(1997, 2, 1)));
 		//System.out.println("199WinterCharge is: "+subject.charge().getAmount());
@@ -182,7 +182,7 @@ public class EngergyBillingTests {
 	
 	@Test
 	public void DisabilitySite199Summer() {
-		DisabilitySite subject = new DisabilitySite(Registry.get("B"));
+		TimedSite subject = new DisabilitySite(Registry.get("B"));
 		subject.addReading(new Reading(300, new Date(1997, 6, 5)));
 		subject.addReading(new Reading(499, new Date(1997, 31, 8)));
 		//System.out.println("199SummerCharge is: "+subject.charge().getAmount());
@@ -192,7 +192,7 @@ public class EngergyBillingTests {
 	@Test
 	//the summerdays calculation yield -134 for this case - this clearly an error, but we ignore it for now
 	public void DisabilitySite199WholeYear() {
-		DisabilitySite subject = new DisabilitySite(Registry.get("A"));
+		TimedSite subject = new DisabilitySite(Registry.get("A"));
 		subject.addReading(new Reading(20000, new Date(1997, 1, 1)));
 		subject.addReading(new Reading(20199, new Date(1997, 12, 31)));
 		//System.out.println("199WholeYearCharge is: "+subject.charge().getAmount());
@@ -201,7 +201,7 @@ public class EngergyBillingTests {
 	
 	@Test
 	public void DisabilitySite4000WholeYear() {
-		DisabilitySite subject = new DisabilitySite(Registry.get("B"));
+		TimedSite subject = new DisabilitySite(Registry.get("B"));
 		subject.addReading(new Reading(1000, new Date(1997, 1, 1)));
 		subject.addReading(new Reading(5000, new Date(1997, 12, 31)));
 		//System.out.println("4000WholeYearCharge is: "+subject.charge().getAmount());
