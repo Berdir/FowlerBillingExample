@@ -1,13 +1,16 @@
-package fowler.energybilling;
+package fowler.energybilling.sites;
 
 import java.util.Date;
+
+import fowler.energybilling.Dollars;
+import fowler.energybilling.Zone;
 
 public class ResidentialSite extends TimedSite {
 
 	private static final double TAX_RATE = 0.05;
 	private Zone _zone;
 
-	ResidentialSite(Zone zone) {
+	public ResidentialSite(Zone zone) {
 		_zone = zone;
 	}
 

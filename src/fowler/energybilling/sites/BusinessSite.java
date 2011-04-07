@@ -1,4 +1,6 @@
-package fowler.energybilling;
+package fowler.energybilling.sites;
+
+import fowler.energybilling.Dollars;
 
 public class BusinessSite extends GenericSite {
 	private static final double START_RATE = 0.09;

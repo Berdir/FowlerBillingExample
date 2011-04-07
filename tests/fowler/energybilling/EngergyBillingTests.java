@@ -6,13 +6,15 @@ import java.util.Date;
 
 import org.junit.*;
 
-import fowler.energybilling.BusinessSite;
-import fowler.energybilling.DisabilitySite;
 import fowler.energybilling.Dollars;
-import fowler.energybilling.LifelineSite;
 import fowler.energybilling.Reading;
 import fowler.energybilling.Registry;
 import fowler.energybilling.Zone;
+import fowler.energybilling.sites.BusinessSite;
+import fowler.energybilling.sites.DisabilitySite;
+import fowler.energybilling.sites.LifelineSite;
+import fowler.energybilling.sites.ResidentialSite;
+import fowler.energybilling.sites.TimedSite;
 
 /* Jana Koehler, Dec 13 2010
  * Several things one can do with this example code

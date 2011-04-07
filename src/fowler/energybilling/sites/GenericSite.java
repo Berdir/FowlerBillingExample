@@ -1,4 +1,7 @@
-package fowler.energybilling;
+package fowler.energybilling.sites;
+
+import fowler.energybilling.Dollars;
+import fowler.energybilling.NoReadingsException;
 
 public abstract class GenericSite extends Site {
 

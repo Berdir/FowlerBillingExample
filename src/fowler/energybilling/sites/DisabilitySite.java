@@ -1,6 +1,9 @@
-package fowler.energybilling;
+package fowler.energybilling.sites;
 
 import java.util.Date;
+
+import fowler.energybilling.Dollars;
+import fowler.energybilling.Zone;
 
 public class DisabilitySite extends TimedSite {
 	private static final Dollars FUEL_TAX_CAP = new Dollars(0.10);
