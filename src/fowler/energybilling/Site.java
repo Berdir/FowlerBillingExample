@@ -1,12 +1,12 @@
 package fowler.energybilling;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 public class Site {
 
-	protected int lastReading;
-	protected Reading[] _readings = new Reading[1000];
+	protected ArrayList<Reading> _readings = new ArrayList<Reading>();
 
 	public Site() {
 		super();
@@ -16,6 +16,10 @@ public class Site {
 		Calendar c = Calendar.getInstance();
 		c.setTime(arg);
 		return c.get(Calendar.DAY_OF_YEAR);
+	}
+
+	public void addReading(Reading newReading) {
+		_readings.add(newReading);
 	}
 
 }
