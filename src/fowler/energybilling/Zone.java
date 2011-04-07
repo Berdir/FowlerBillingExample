@@ -17,14 +17,6 @@ public class Zone {
 		this.summerStart = summerStart;
 		this.summerEnd = summerEnd;
 	};
-	
-	public Zone persist() {
-		Registry.add(this);
-		return this;
-	}
-	public static Zone get (String name) {
-		return (Zone) Registry.get(name);
-	}
 	public Date getSummerEnd() {
 		return summerEnd;
 	}
