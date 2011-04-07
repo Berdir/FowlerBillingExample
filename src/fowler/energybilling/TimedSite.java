@@ -10,11 +10,10 @@ public abstract class TimedSite extends Site {
 
 	protected abstract Dollars charge(int fullUsage, Date start, Date end);
 
-	public Dollars charge() {
+	public Dollars charge() throws NoReadingsException {
 		int size = _readings.size();
 		if (size < 2) {
-			// @todo Replace with better Exceptions, tests currently expect a NullPointer exception. 
-			throw new NullPointerException();
+			throw new NoReadingsException();
 		}
 		
 		int usage = _readings.get(size - 1).amount() - _readings.get(size - 2).amount();

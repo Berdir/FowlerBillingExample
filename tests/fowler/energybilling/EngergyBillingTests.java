@@ -84,7 +84,7 @@ public class EngergyBillingTests {
 
 	// the readings are the same, therefore no energy has been consumed - this should return a 0 charge
 	@Test
-	public void LifeLineSite0() {
+	public void LifeLineSite0() throws NoReadingsException {
 		LifelineSite subject = new LifelineSite();
 		subject.addReading(new Reading(10, new Date(1997, 1, 1)));
 		subject.addReading(new Reading(10, new Date(1997, 2, 1)));
@@ -94,7 +94,7 @@ public class EngergyBillingTests {
 	
 
 	@Test
-	public void LifeLineSite100() {
+	public void LifeLineSite100() throws NoReadingsException {
 		LifelineSite subject = new LifelineSite();
 		subject.addReading(new Reading(10, new Date(1997, 1, 1)));
 		subject.addReading(new Reading(110, new Date(1997, 1, 2)));
@@ -103,7 +103,7 @@ public class EngergyBillingTests {
 	}
 
 	@Test
-	public void LifeLineSite101() {
+	public void LifeLineSite101() throws NoReadingsException {
 		LifelineSite subject = new LifelineSite();
 		subject.addReading(new Reading(1000, new Date("1 Jan 1997")));
 		subject.addReading(new Reading(1101, new Date("1 Feb 1997")));
@@ -113,7 +113,7 @@ public class EngergyBillingTests {
 
 	
 	@Test
-	public void LifeLineSite200() {
+	public void LifeLineSite200() throws NoReadingsException {
 		LifelineSite subject = new LifelineSite();
 		subject.addReading(new Reading(0, new Date("1 Jan 1997")));
 		subject.addReading(new Reading(200, new Date("1 Feb 1997")));
@@ -122,7 +122,7 @@ public class EngergyBillingTests {
 	}
 
 	@Test
-	public void LifeLineSite201() {
+	public void LifeLineSite201() throws NoReadingsException {
 		LifelineSite subject = new LifelineSite();
 		subject.addReading(new Reading(50, new Date("1 Jan 1997")));
 		subject.addReading(new Reading(251, new Date("1 Feb 1997")));
@@ -131,7 +131,7 @@ public class EngergyBillingTests {
 	}
 
 	@Test
-	public void LifeLineSiteMax() {
+	public void LifeLineSiteMax() throws NoReadingsException {
 		LifelineSite subject = new LifelineSite();
 		subject.addReading(new Reading (0, new Date ("1 Jan 1997")));
 		subject.addReading(new Reading (Integer.MAX_VALUE, new Date ("1 Feb 1997")));
@@ -144,7 +144,7 @@ public class EngergyBillingTests {
 	//this can be intended or a bug, the first of the two tests can detect the bug, the second takes the exception as ok
 	
 	@Ignore  //only use when the null pointer has been fixed as an error
-	public void testNoReadings() {
+	public void testNoReadings() throws NoReadingsException {
 		LifelineSite subject = new LifelineSite();
 		assertEquals (new Dollars(0), subject.charge());
 		}
@@ -155,12 +155,12 @@ public class EngergyBillingTests {
 		try {
 		subject.charge();
 		assert(false);
-		} catch (NullPointerException e) {}
+		} catch (NoReadingsException e) {}
 		}
 	
 	
 	@Test
-	public void DisabilitySite0() {
+	public void DisabilitySite0() throws NoReadingsException {
 		TimedSite subject = new DisabilitySite(Registry.get("A"));
 		subject.addReading(new Reading(10, new Date(1997, 1, 1)));
 		subject.addReading(new Reading(10, new Date(1997, 2, 1)));
@@ -172,7 +172,7 @@ public class EngergyBillingTests {
 	//the original code by Fowler only charges 0 in all cases
 	
 	@Test
-	public void DisabilitySite199Winter() {
+	public void DisabilitySite199Winter() throws NoReadingsException {
 		TimedSite subject = new DisabilitySite(Registry.get("A"));
 		subject.addReading(new Reading(100, new Date(1997, 1, 1)));
 		subject.addReading(new Reading(299, new Date(1997, 2, 1)));
@@ -181,7 +181,7 @@ public class EngergyBillingTests {
 	}
 	
 	@Test
-	public void DisabilitySite199Summer() {
+	public void DisabilitySite199Summer() throws NoReadingsException {
 		TimedSite subject = new DisabilitySite(Registry.get("B"));
 		subject.addReading(new Reading(300, new Date(1997, 6, 5)));
 		subject.addReading(new Reading(499, new Date(1997, 31, 8)));
@@ -191,7 +191,7 @@ public class EngergyBillingTests {
 	
 	@Test
 	//the summerdays calculation yield -134 for this case - this clearly an error, but we ignore it for now
-	public void DisabilitySite199WholeYear() {
+	public void DisabilitySite199WholeYear() throws NoReadingsException {
 		TimedSite subject = new DisabilitySite(Registry.get("A"));
 		subject.addReading(new Reading(20000, new Date(1997, 1, 1)));
 		subject.addReading(new Reading(20199, new Date(1997, 12, 31)));
@@ -200,7 +200,7 @@ public class EngergyBillingTests {
 	}
 	
 	@Test
-	public void DisabilitySite4000WholeYear() {
+	public void DisabilitySite4000WholeYear() throws NoReadingsException {
 		TimedSite subject = new DisabilitySite(Registry.get("B"));
 		subject.addReading(new Reading(1000, new Date(1997, 1, 1)));
 		subject.addReading(new Reading(5000, new Date(1997, 12, 31)));
@@ -211,7 +211,7 @@ public class EngergyBillingTests {
 	
 	
 	@Test
-	public void BusinessSite0() {
+	public void BusinessSite0() throws NoReadingsException {
 		BusinessSite subject = new BusinessSite();
 		subject.addReading(new Reading(10, new Date(1997, 1, 1)));
 		subject.addReading(new Reading(10, new Date(1997, 2, 1)));
@@ -220,7 +220,7 @@ public class EngergyBillingTests {
 	
 	
 	@Test
-	public void BusinessSite4000WholeYear() {
+	public void BusinessSite4000WholeYear() throws NoReadingsException {
 		BusinessSite subject = new BusinessSite();
 		subject.addReading(new Reading(1000, new Date(1997, 1, 1)));
 		subject.addReading(new Reading(5000, new Date(1997, 12, 31)));
@@ -230,7 +230,7 @@ public class EngergyBillingTests {
 	
 	
 	@Test
-	public void BusinessSite199Winter() {
+	public void BusinessSite199Winter() throws NoReadingsException {
 		BusinessSite subject = new BusinessSite();
 		subject.addReading(new Reading(100, new Date(1997, 1, 1)));
 		subject.addReading(new Reading(299, new Date(1997, 2, 1)));
@@ -239,7 +239,7 @@ public class EngergyBillingTests {
 	}
 	
 	@Test
-	public void BusinessSite199Summer() {
+	public void BusinessSite199Summer() throws NoReadingsException {
 		BusinessSite subject = new BusinessSite();
 		subject.addReading(new Reading(300, new Date(1997, 6, 15)));
 		subject.addReading(new Reading(499, new Date(1997, 31, 8)));
@@ -249,7 +249,7 @@ public class EngergyBillingTests {
 	
 	
 	@Test
-	public void ResidentialSite199Summer() {
+	public void ResidentialSite199Summer() throws NoReadingsException {
 		ResidentialSite subject = new ResidentialSite(Registry.get("A"));
 		subject.addReading(new Reading(300, new Date(1997, 6, 15)));
 		subject.addReading(new Reading(499, new Date(1997, 31, 8)));
@@ -259,7 +259,7 @@ public class EngergyBillingTests {
 	
 	
 	@Test
-	public void ResidentialSite4000WholeYear() {
+	public void ResidentialSite4000WholeYear() throws NoReadingsException {
 		ResidentialSite subject = new ResidentialSite(Registry.get("B"));
 		subject.addReading(new Reading(1000, new Date(1997, 1, 1)));
 		subject.addReading(new Reading(5000, new Date(1997, 12, 31)));
