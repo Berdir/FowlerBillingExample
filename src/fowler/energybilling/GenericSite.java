@@ -9,8 +9,7 @@ public abstract class GenericSite extends Site {
 	protected abstract Dollars charge(int usage);
 
 	public Dollars charge() throws NoReadingsException {
-		int usage = getRecentReading().amount() - getRecentReading(1).amount();
-		return charge(usage);
+		return charge(getRecentUsage());
 	}
 
 }

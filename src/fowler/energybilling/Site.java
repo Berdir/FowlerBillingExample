@@ -51,4 +51,13 @@ public class Site {
 			throw new NoReadingsException();
 		}
 	}
+
+	/**
+	 * @return
+	 * @throws NoReadingsException
+	 */
+	protected int getRecentUsage() throws NoReadingsException {
+		int usage = getRecentReading().amount() - getRecentReading(1).amount();
+		return usage;
+	}
 }
