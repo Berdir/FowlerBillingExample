@@ -4,20 +4,43 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * Base class for all Site classes.
+ * 
+ * Managed Readings and provides helper methods to get information from them.
+ * 
+ * @author berdir
+ */
 public class Site {
 
+	/**
+	 * List of Readings for a given Site.
+	 */
 	protected ArrayList<Reading> _readings = new ArrayList<Reading>();
 
 	public Site() {
 		super();
 	}
 
-	protected int dayOfYear(Date arg) {
+	/**
+	 * Get the day of the year of a given date.
+	 *
+	 * @param date The date of which the day should be returned.
+	 *
+	 * @return
+	 *   The day of year as an integer.
+	 */
+	protected int dayOfYear(Date date) {
 		Calendar c = Calendar.getInstance();
-		c.setTime(arg);
+		c.setTime(date);
 		return c.get(Calendar.DAY_OF_YEAR);
 	}
 
+	/**
+	 * Add a new reading.
+	 *
+	 * @param newReading
+	 */
 	public void addReading(Reading newReading) {
 		_readings.add(newReading);
 	}
