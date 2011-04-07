@@ -27,7 +27,7 @@ public class DisabilityTests {
 	}
 	
 	@Test
-	public void DisabilitySite0() throws NoReadingsException {
+	public void DisabilitySite0() {
 		TimedSite subject = new DisabilitySite(zoneA);
 		subject.addReading(new Reading(10, new Date(1997, 1, 1)));
 		subject.addReading(new Reading(10, new Date(1997, 2, 1)));
@@ -39,7 +39,7 @@ public class DisabilityTests {
 	//the original code by Fowler only charges 0 in all cases
 	
 	@Test
-	public void DisabilitySite199Winter() throws NoReadingsException {
+	public void DisabilitySite199Winter() {
 		TimedSite subject = new DisabilitySite(zoneA);
 		subject.addReading(new Reading(100, new Date(1997, 1, 1)));
 		subject.addReading(new Reading(299, new Date(1997, 2, 1)));
@@ -48,7 +48,7 @@ public class DisabilityTests {
 	}
 	
 	@Test
-	public void DisabilitySite199Summer() throws NoReadingsException {
+	public void DisabilitySite199Summer() {
 		TimedSite subject = new DisabilitySite(zoneB);
 		subject.addReading(new Reading(300, new Date(1997, 6, 5)));
 		subject.addReading(new Reading(499, new Date(1997, 31, 8)));
@@ -58,7 +58,7 @@ public class DisabilityTests {
 	
 	@Test
 	//the summerdays calculation yield -134 for this case - this clearly an error, but we ignore it for now
-	public void DisabilitySite199WholeYear() throws NoReadingsException {
+	public void DisabilitySite199WholeYear() {
 		TimedSite subject = new DisabilitySite(zoneA);
 		subject.addReading(new Reading(20000, new Date(1997, 1, 1)));
 		subject.addReading(new Reading(20199, new Date(1997, 12, 31)));
@@ -67,7 +67,7 @@ public class DisabilityTests {
 	}
 	
 	@Test
-	public void DisabilitySite4000WholeYear() throws NoReadingsException {
+	public void DisabilitySite4000WholeYear() {
 		TimedSite subject = new DisabilitySite(zoneB);
 		subject.addReading(new Reading(1000, new Date(1997, 1, 1)));
 		subject.addReading(new Reading(5000, new Date(1997, 12, 31)));

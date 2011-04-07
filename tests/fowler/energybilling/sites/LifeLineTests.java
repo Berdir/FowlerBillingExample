@@ -5,11 +5,9 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Date;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import fowler.energybilling.Dollars;
-import fowler.energybilling.NoReadingsException;
 import fowler.energybilling.Reading;
 
 public class LifeLineTests {
@@ -24,7 +22,7 @@ public class LifeLineTests {
 
 	// the readings are the same, therefore no energy has been consumed - this should return a 0 charge
 	@Test
-	public void LifeLineSite0() throws NoReadingsException {
+	public void LifeLineSite0() {
 		LifelineSite subject = new LifelineSite();
 		subject.addReading(new Reading(10, new Date(1997, 1, 1)));
 		subject.addReading(new Reading(10, new Date(1997, 2, 1)));
@@ -34,7 +32,7 @@ public class LifeLineTests {
 	
 
 	@Test
-	public void LifeLineSite100() throws NoReadingsException {
+	public void LifeLineSite100() {
 		LifelineSite subject = new LifelineSite();
 		subject.addReading(new Reading(10, new Date(1997, 1, 1)));
 		subject.addReading(new Reading(110, new Date(1997, 1, 2)));
@@ -43,7 +41,7 @@ public class LifeLineTests {
 	}
 
 	@Test
-	public void LifeLineSite101() throws NoReadingsException {
+	public void LifeLineSite101() {
 		LifelineSite subject = new LifelineSite();
 		subject.addReading(new Reading(1000, new Date("1 Jan 1997")));
 		subject.addReading(new Reading(1101, new Date("1 Feb 1997")));
@@ -53,7 +51,7 @@ public class LifeLineTests {
 
 	
 	@Test
-	public void LifeLineSite200() throws NoReadingsException {
+	public void LifeLineSite200() {
 		LifelineSite subject = new LifelineSite();
 		subject.addReading(new Reading(0, new Date("1 Jan 1997")));
 		subject.addReading(new Reading(200, new Date("1 Feb 1997")));
@@ -62,7 +60,7 @@ public class LifeLineTests {
 	}
 
 	@Test
-	public void LifeLineSite201() throws NoReadingsException {
+	public void LifeLineSite201() {
 		LifelineSite subject = new LifelineSite();
 		subject.addReading(new Reading(50, new Date("1 Jan 1997")));
 		subject.addReading(new Reading(251, new Date("1 Feb 1997")));
@@ -71,30 +69,20 @@ public class LifeLineTests {
 	}
 
 	@Test
-	public void LifeLineSiteMax() throws NoReadingsException {
+	public void LifeLineSiteMax() {
 		LifelineSite subject = new LifelineSite();
 		subject.addReading(new Reading (0, new Date ("1 Jan 1997")));
 		subject.addReading(new Reading (Integer.MAX_VALUE, new Date ("1 Feb 1997")));
 		//System.out.println("MaxCharge is: "+subject.charge().getAmount());
 		assertEquals (new Dollars(2.147483647E7).getAmount(), subject.charge().getAmount());
 		}
-	
-	
-	//trying to charge in case of no readings leads to a null pointer exception
-	//this can be intended or a bug, the first of the two tests can detect the bug, the second takes the exception as ok
-	
-	@Ignore  //only use when the null pointer has been fixed as an error
-	public void testNoReadings() throws NoReadingsException {
+
+	/**
+	 * Test that there is no exception thrown when charge() is called without any Readings.
+	 */
+	@Test
+	public void testNoReadings() {
 		LifelineSite subject = new LifelineSite();
 		assertEquals (new Dollars(0), subject.charge());
-		}
-	
-	@Test
-	public void NoReadingsCatchException() {
-		LifelineSite subject = new LifelineSite();
-		try {
-		subject.charge();
-		assert(false);
-		} catch (NoReadingsException e) {}
-		}
+	}
 }

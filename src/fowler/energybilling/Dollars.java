@@ -1,17 +1,14 @@
 package fowler.energybilling;
 
-import java.text.DecimalFormatSymbols;
-
-
 /*Martin Fowler: The dollars class is a use of the Quantity pattern. It combines the
-notion of an amount and a currency. I’m not going to go into too many
+notion of an amount and a currency. I'm not going to go into too many
 details here. Essentially you create dollars objects with a constructor
 that has a number for the amount. The class supports some basic arithmetic
 operations.
 An important part of the dollars class is the fact that it rounds all numbers
 to the nearest cent, a behavior which is often very important in
-financial systems. As my friend Ron Jeffries told me: “Be kind to pennies,
-and they will be kind to you”.
+financial systems. As my friend Ron Jeffries told me: "Be kind to pennies,
+and they will be kind to you".
 JK: just added a round method that is invoked at the end of each charge method
 */
 
@@ -111,4 +108,16 @@ public class Dollars {
 		 this.amount = (double)temp/Math.pow(10,c);
 		 return this;
 		}
+
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Dollars) {
+			return amount == ((Dollars)obj).amount;
+		}
+		return false;
+	}
 }

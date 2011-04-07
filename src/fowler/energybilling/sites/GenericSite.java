@@ -11,8 +11,12 @@ public abstract class GenericSite extends Site {
 
 	protected abstract Dollars charge(int usage);
 
-	public Dollars charge() throws NoReadingsException {
-		return charge(getRecentUsage());
+	public Dollars charge() {
+		try {
+			return charge(getRecentUsage());
+		} catch (NoReadingsException e) {
+			return new Dollars(0);
+		}
 	}
 
 }
