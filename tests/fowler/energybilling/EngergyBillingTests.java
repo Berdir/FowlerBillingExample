@@ -45,12 +45,6 @@ public class EngergyBillingTests {
 	}
 
 	@Test
-	public void dummyTest() {
-		String s = "hi";
-		assertEquals("it works", "hi", s);
-	}
-
-	@Test
 	public void testRegistry() {
 		assertFalse("Registry is empty", Registry.isEmpty());
 		assertTrue("Registry contains 3 zones", Registry.size() == 3);
