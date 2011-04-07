@@ -2,6 +2,7 @@ package fowler.energybilling.sites;
 
 import java.util.Date;
 
+import fowler.energybilling.DateHelper;
 import fowler.energybilling.Dollars;
 import fowler.energybilling.Zone;
 
@@ -19,26 +20,11 @@ public class DisabilitySite extends TimedSite {
 	@Override
 	protected Dollars charge(int fullUsage, Date start, Date end) {
 		Dollars result;
-		double summerFraction;
+		
 		// JK: don't charge more than the CAP (which is set to 200)
 		int usage = Math.min(fullUsage, CAP);
-		// JK: now we need the summer/winter time information from the zones
-		if (start.after(_zone.getSummerEnd()) || end.before(_zone.getSummerStart()))
-			summerFraction = 0;
-		else if (!start.before(_zone.getSummerStart()) && !start.after(_zone.getSummerEnd())
-				&& !end.before(_zone.getSummerStart()) && !end.after(_zone.getSummerEnd()))
-			summerFraction = 1;
-		else {
-			double summerDays;
-			if (start.before(_zone.getSummerStart()) || start.after(_zone.getSummerEnd())) {
-				// end is in the summer
-				summerDays = dayOfYear(end) - dayOfYear(_zone.getSummerStart()) + 1;
-			} else {
-				// start is in summer
-				summerDays = dayOfYear(_zone.getSummerEnd()) - dayOfYear(start) + 1;
-			}
-			summerFraction = summerDays / (dayOfYear(end) - dayOfYear(start) + 1);
-		}
+		
+		double summerFraction = _zone.getSummerFraction(start, end);
 		result = new Dollars((usage * _zone.getSummerRate() * summerFraction)
 				+ (usage * _zone.getWinterRate() * (1 - summerFraction)));
 		// if the full usage is below the cap the max yields zero

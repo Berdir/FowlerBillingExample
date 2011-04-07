@@ -34,6 +34,40 @@ public class Zone {
 		return this.name;
 		
 	}
+	/**
+	 * @param start
+	 * @param end
+	 * @return
+	 */
+	public double getSummerFraction(Date start, Date end) {
+		double summerFraction;
+		// Find out how much of period is in the summer
+		if (start.after(getSummerEnd()) || end.before(getSummerStart()))
+			summerFraction = 0;
+		else if (!start.before(getSummerStart())
+				&& !start.after(getSummerEnd())
+				&& !end.before(getSummerStart())
+				&& !end.after(getSummerEnd()))
+			summerFraction = 1;
+		else { // part in summer part in winter
+			double summerDays;
+			if (start.before(getSummerStart())
+					|| start.after(getSummerEnd())) {
+				// end is in the summer
+				summerDays = DateHelper.dayOfYear(end) - DateHelper.dayOfYear(getSummerStart())
+						+ 1;
+			} else {
+				// start is in summer
+				summerDays = DateHelper.dayOfYear(getSummerEnd()) - DateHelper.dayOfYear(start)
+						+ 1;
+			}
+			;
+			summerFraction = summerDays
+					/ (DateHelper.dayOfYear(end) - DateHelper.dayOfYear(start) + 1);
+		}
+		;
+		return summerFraction;
+	}
 
 }
 	

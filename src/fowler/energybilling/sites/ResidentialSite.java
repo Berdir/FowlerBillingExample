@@ -16,32 +16,7 @@ public class ResidentialSite extends TimedSite {
 
 	protected Dollars charge(int usage, Date start, Date end) {
 		Dollars result;
-		double summerFraction;
-		// Find out how much of period is in the summer
-		if (start.after(_zone.getSummerEnd()) || end.before(_zone.getSummerStart()))
-			summerFraction = 0;
-		else if (!start.before(_zone.getSummerStart())
-				&& !start.after(_zone.getSummerEnd())
-				&& !end.before(_zone.getSummerStart())
-				&& !end.after(_zone.getSummerEnd()))
-			summerFraction = 1;
-		else { // part in summer part in winter
-			double summerDays;
-			if (start.before(_zone.getSummerStart())
-					|| start.after(_zone.getSummerEnd())) {
-				// end is in the summer
-				summerDays = dayOfYear(end) - dayOfYear(_zone.getSummerStart())
-						+ 1;
-			} else {
-				// start is in summer
-				summerDays = dayOfYear(_zone.getSummerEnd()) - dayOfYear(start)
-						+ 1;
-			}
-			;
-			summerFraction = summerDays
-					/ (dayOfYear(end) - dayOfYear(start) + 1);
-		}
-		;
+		double summerFraction = _zone.getSummerFraction(start, end);
 
 		result = new Dollars((usage * _zone.getSummerRate() * summerFraction)
 				+ (usage * _zone.getWinterRate() * (1 - summerFraction)));

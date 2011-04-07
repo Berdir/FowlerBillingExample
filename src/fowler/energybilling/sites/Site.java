@@ -26,20 +26,6 @@ public class Site {
 	}
 
 	/**
-	 * Get the day of the year of a given date.
-	 *
-	 * @param date The date of which the day should be returned.
-	 *
-	 * @return
-	 *   The day of year as an integer.
-	 */
-	protected int dayOfYear(Date date) {
-		Calendar c = Calendar.getInstance();
-		c.setTime(date);
-		return c.get(Calendar.DAY_OF_YEAR);
-	}
-
-	/**
 	 * Add a new reading.
 	 *
 	 * @param newReading
