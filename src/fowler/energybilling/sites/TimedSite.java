@@ -8,6 +8,7 @@ import fowler.energybilling.Zone;
 
 public abstract class TimedSite extends Site {
 
+	protected static final double FUEL = 0.0175;
 	protected Zone _zone;
 
 	public TimedSite(Zone zone) {

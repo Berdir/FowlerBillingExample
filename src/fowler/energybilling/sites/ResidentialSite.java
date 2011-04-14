@@ -7,7 +7,6 @@ import fowler.energybilling.Zone;
 
 public class ResidentialSite extends TimedSite {
 
-	private static final double FUEL = 0.0175;
 	private static final double TAX_RATE = 0.05;
 	public ResidentialSite(Zone zone) {
 		super(zone);
