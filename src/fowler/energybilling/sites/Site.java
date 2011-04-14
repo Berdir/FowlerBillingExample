@@ -16,6 +16,7 @@ import fowler.energybilling.Reading;
  */
 public class Site {
 
+	protected static final double FUEL = 0.0175;
 	/**
 	 * List of Readings for a given Site.
 	 */

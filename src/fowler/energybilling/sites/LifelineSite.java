@@ -18,7 +18,7 @@ public class LifelineSite extends GenericSite {
 		result = result.minus(new Dollars(8)).max(new Dollars(0));
 		Dollars tax = result.times(TAX_RATE);
 		result.plus(tax);
-		Dollars fuelCharge = new Dollars(usage * 0.0175);
+		Dollars fuelCharge = new Dollars(usage * FUEL);
 		result.plus(fuelCharge.times(1 + TAX_RATE));
 		result.round(2);
 		return result;
