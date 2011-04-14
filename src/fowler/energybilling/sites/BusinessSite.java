@@ -12,8 +12,15 @@ public class BusinessSite extends GenericSite {
 			return new Dollars(0);
 		}
 		Dollars result = getDollarsFromUsage(usage);
+		result = calculcateBaseDollars(usage, result);
+		result.round(2);
+		return result;
+	}
+
+	private Dollars calculcateBaseDollars(int usage, Dollars result) {
 		result = result.plus(new Dollars(usage * 0.0175));
 		Dollars base = result.min(new Dollars(50)).times(0.07);
+		
 		if (result.isGreaterThan(new Dollars(50))) {
 			base = base.plus(result.min(new Dollars(75))
 					.minus(new Dollars(50)).times(0.06));
@@ -23,7 +30,6 @@ public class BusinessSite extends GenericSite {
 					0.05));
 		}
 		result = result.plus(base);
-		result = result.round(2);
 		return result;
 	}
 
