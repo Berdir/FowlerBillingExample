@@ -10,8 +10,9 @@ public abstract class TimedSite extends Site {
 
 	protected Zone _zone;
 
-	public TimedSite() {
+	public TimedSite(Zone zone) {
 		super();
+		_zone = zone;
 	}
 
 	protected abstract Dollars charge(int fullUsage, Date start, Date end);

@@ -2,7 +2,6 @@ package fowler.energybilling.sites;
 
 import java.util.Date;
 
-import fowler.energybilling.DateHelper;
 import fowler.energybilling.Dollars;
 import fowler.energybilling.Zone;
 
@@ -12,8 +11,7 @@ public class DisabilitySite extends TimedSite {
 	private static final int CAP = 200;
 
 	public DisabilitySite(Zone zone) {
-		this._zone = zone;
-
+		super(zone);
 	}
 
 	@Override

@@ -9,7 +9,7 @@ public class ResidentialSite extends TimedSite {
 
 	private static final double TAX_RATE = 0.05;
 	public ResidentialSite(Zone zone) {
-		_zone = zone;
+		super(zone);
 	}
 
 	protected Dollars charge(int usage, Date start, Date end) {
