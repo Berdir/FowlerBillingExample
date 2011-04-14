@@ -9,8 +9,6 @@ public abstract class GenericSite extends Site {
 		super();
 	}
 
-	protected abstract Dollars charge(int usage);
-
 	public Dollars charge() {
 		try {
 			return charge(getRecentUsage());
@@ -18,5 +16,7 @@ public abstract class GenericSite extends Site {
 			return new Dollars(0);
 		}
 	}
+
+	protected abstract Dollars charge(int usage);
 
 }

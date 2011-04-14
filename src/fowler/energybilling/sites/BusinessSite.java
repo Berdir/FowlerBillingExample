@@ -7,17 +7,6 @@ public class BusinessSite extends GenericSite {
 	static final double END_RATE = 0.05;
 	static final int END_AMOUNT = 1000;
 
-	@Override
-	protected Dollars charge(int usage) {
-		if (usage == 0) {
-			return new Dollars(0);
-		}
-		Dollars result = getDollarsFromUsage(usage);
-		result = calculcateBaseDollars(usage, result);
-		result.round(2);
-		return result;
-	}
-
 	private Dollars calculcateBaseDollars(int usage, Dollars result) {
 		result = result.plus(new Dollars(usage * 0.0175));
 		Dollars base = result.min(new Dollars(50)).times(0.07);
@@ -30,6 +19,17 @@ public class BusinessSite extends GenericSite {
 			base = base.plus(result.minus(new Dollars(75)).times(0.05));
 		}
 		result = result.plus(base);
+		return result;
+	}
+
+	@Override
+	protected Dollars charge(int usage) {
+		if (usage == 0) {
+			return new Dollars(0);
+		}
+		Dollars result = getDollarsFromUsage(usage);
+		result = calculcateBaseDollars(usage, result);
+		result.round(2);
 		return result;
 	}
 

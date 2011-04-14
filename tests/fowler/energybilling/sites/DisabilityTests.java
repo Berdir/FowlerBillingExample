@@ -40,18 +40,6 @@ public class DisabilityTests {
 	// the original code by Fowler only charges 0 in all cases
 
 	@Test
-	public void DisabilitySite199Winter() {
-		TimedSite subject = new DisabilitySite(zoneA);
-		subject.addReading(new Reading(100,
-				new DateTime(1997, 1, 1, 0, 0, 0, 0)));
-		subject.addReading(new Reading(299,
-				new DateTime(1997, 2, 1, 0, 0, 0, 0)));
-		// System.out.println("199WinterCharge is: "+subject.charge().getAmount());
-		assertEquals(new Dollars(4.97).getAmount(), subject.charge()
-				.getAmount());
-	}
-
-	@Test
 	public void DisabilitySite199Summer() {
 		// System.out.println("Disabilty199Summer");
 		TimedSite subject = new DisabilitySite(zoneB);
@@ -73,6 +61,18 @@ public class DisabilityTests {
 				0, 0)));
 		// Yeah, now it's not negative anymore. Yoda++
 		// Was -21.69
+		assertEquals(new Dollars(4.97).getAmount(), subject.charge()
+				.getAmount());
+	}
+
+	@Test
+	public void DisabilitySite199Winter() {
+		TimedSite subject = new DisabilitySite(zoneA);
+		subject.addReading(new Reading(100,
+				new DateTime(1997, 1, 1, 0, 0, 0, 0)));
+		subject.addReading(new Reading(299,
+				new DateTime(1997, 2, 1, 0, 0, 0, 0)));
+		// System.out.println("199WinterCharge is: "+subject.charge().getAmount());
 		assertEquals(new Dollars(4.97).getAmount(), subject.charge()
 				.getAmount());
 	}

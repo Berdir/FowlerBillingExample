@@ -16,7 +16,14 @@ public abstract class TimedSite extends Site {
 		_zone = zone;
 	}
 
-	protected abstract Dollars charge(int fullUsage, Interval interval);
+	protected Dollars calculateSummerWinterRate(int usage, Interval interval) {
+		Dollars result;
+		double summerFraction = _zone.getSummerFraction(interval.getStart(),
+				interval.getStart());
+		result = new Dollars((usage * _zone.getSummerRate() * summerFraction)
+				+ (usage * _zone.getWinterRate() * (1 - summerFraction)));
+		return result;
+	}
 
 	public Dollars charge() {
 		try {
@@ -32,13 +39,6 @@ public abstract class TimedSite extends Site {
 		}
 	}
 
-	protected Dollars calculateSummerWinterRate(int usage, Interval interval) {
-		Dollars result;
-		double summerFraction = _zone.getSummerFraction(interval.getStart(),
-				interval.getStart());
-		result = new Dollars((usage * _zone.getSummerRate() * summerFraction)
-				+ (usage * _zone.getWinterRate() * (1 - summerFraction)));
-		return result;
-	}
+	protected abstract Dollars charge(int fullUsage, Interval interval);
 
 }

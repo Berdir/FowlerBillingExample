@@ -18,25 +18,13 @@ public class Zone {
 		this.summerEnd = summerEnd;
 	};
 
-	public DateTime getSummerEnd() {
-		return summerEnd;
-	}
-
-	public DateTime getSummerStart() {
-		return summerStart;
-	}
-
-	public double getWinterRate() {
-		return winterRate;
-	}
-
-	public double getSummerRate() {
-		return summerRate;
-	}
-
 	public String getName() {
 		return this.name;
 
+	}
+
+	public DateTime getSummerEnd() {
+		return summerEnd;
 	}
 
 	/**
@@ -70,6 +58,18 @@ public class Zone {
 					- start.getDayOfYear() + 1;
 		}
 		return summerFraction;
+	}
+
+	public double getSummerRate() {
+		return summerRate;
+	}
+
+	public DateTime getSummerStart() {
+		return summerStart;
+	}
+
+	public double getWinterRate() {
+		return winterRate;
 	}
 
 }

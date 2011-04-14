@@ -21,45 +21,45 @@ public class Dollars {
 		this.currency = "USD";
 	}
 
-	public Dollars(double amount) {
-		this.amount = amount;
-		this.currency = "USD";
-	}
-
 	public Dollars(Dollars dollar) {
 		this.amount = dollar.amount;
 		this.currency = dollar.currency;
 	}
 
-	public Dollars plus(Dollars dollars) {
-		this.amount += dollars.amount;
-		return this;
+	public Dollars(double amount) {
+		this.amount = amount;
+		this.currency = "USD";
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Dollars) {
+			return amount == ((Dollars) obj).amount;
+		}
+		return false;
 	}
 
 	public Double getAmount() {
 		return amount;
 	}
 
-	public void setAmount(Double amount) {
-		this.amount = amount;
-	}
-
 	public String getCurrency() {
 		return currency;
 	}
 
-	public void setCurrency(String currency) {
-		this.currency = currency;
-	}
-
-	public Dollars times(double taxRate) {
-		this.amount = this.amount * taxRate;
-		return this;
-	}
-
-	public Dollars minus(Dollars dollars) {
-		this.amount -= dollars.amount;
-		return this;
+	public boolean isGreaterThan(Dollars dollars) {
+		boolean result;
+		if (this.amount >= dollars.amount) {
+			result = true;
+		} else {
+			result = false;
+		}
+		return result;
 	}
 
 	public Dollars max(Dollars dollars) {
@@ -82,14 +82,14 @@ public class Dollars {
 		return result;
 	}
 
-	public boolean isGreaterThan(Dollars dollars) {
-		boolean result;
-		if (this.amount >= dollars.amount) {
-			result = true;
-		} else {
-			result = false;
-		}
-		return result;
+	public Dollars minus(Dollars dollars) {
+		this.amount -= dollars.amount;
+		return this;
+	}
+
+	public Dollars plus(Dollars dollars) {
+		this.amount += dollars.amount;
+		return this;
 	}
 
 	// c number of decimals to which we want to round
@@ -99,16 +99,16 @@ public class Dollars {
 		return this;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (obj instanceof Dollars) {
-			return amount == ((Dollars) obj).amount;
-		}
-		return false;
+	public void setAmount(Double amount) {
+		this.amount = amount;
+	}
+
+	public void setCurrency(String currency) {
+		this.currency = currency;
+	}
+
+	public Dollars times(double taxRate) {
+		this.amount = this.amount * taxRate;
+		return this;
 	}
 }
