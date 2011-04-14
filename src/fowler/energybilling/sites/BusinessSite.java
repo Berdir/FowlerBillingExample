@@ -13,14 +13,14 @@ public class BusinessSite extends GenericSite {
 		}
 		Dollars result = getDollarsFromUsage(usage);
 		result = result.plus(new Dollars(usage * 0.0175));
-		Dollars base = new Dollars(result.min(new Dollars(50)).times(0.07));
+		Dollars base = result.min(new Dollars(50)).times(0.07);
 		if (result.isGreaterThan(new Dollars(50))) {
-			base = new Dollars(base.plus(result.min(new Dollars(75))
-					.minus(new Dollars(50)).times(0.06)));
+			base = base.plus(result.min(new Dollars(75))
+					.minus(new Dollars(50)).times(0.06));
 		}
 		if (result.isGreaterThan(new Dollars(75))) {
-			base = new Dollars(base.plus(result.minus(new Dollars(75)).times(
-					0.05)));
+			base = base.plus(result.minus(new Dollars(75)).times(
+					0.05));
 		}
 		result = result.plus(base);
 		result = result.round(2);
