@@ -3,8 +3,6 @@ package fowler.energybilling.sites;
 import fowler.energybilling.Dollars;
 
 public class LifelineSite extends GenericSite {
-	private static final double TAX_RATE = 0.05;
-
 	@Override
 	protected Dollars charge (int usage) {
  		Dollars result = getBaseUsage(usage);

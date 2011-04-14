@@ -17,6 +17,7 @@ import fowler.energybilling.Reading;
 public class Site {
 
 	protected static final double FUEL = 0.0175;
+	protected static final double TAX_RATE = 0.05;
 	/**
 	 * List of Readings for a given Site.
 	 */
