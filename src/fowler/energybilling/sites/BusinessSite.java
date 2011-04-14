@@ -8,15 +8,10 @@ public class BusinessSite extends GenericSite {
 	static final int END_AMOUNT = 1000;
 
 	protected Dollars charge(int usage) {
-		Dollars result;
-		if (usage == 0)
+		if (usage == 0) {
 			return new Dollars(0);
-		double t1 = START_RATE - ((END_RATE * END_AMOUNT) - START_RATE)
-				/ (END_AMOUNT - 1);
-		double t2 = ((END_RATE * END_AMOUNT) - START_RATE)
-				* Math.min(END_AMOUNT, usage) / (END_AMOUNT - 1);
-		double t3 = Math.max(usage - END_AMOUNT, 0) * END_RATE;
-		result = new Dollars(t1 + t2 + t3);
+		}
+		Dollars result = getDollarsFromUsage(usage);
 		result = result.plus(new Dollars(usage * 0.0175));
 		Dollars base = new Dollars(result.min(new Dollars(50)).times(0.07));
 		if (result.isGreaterThan(new Dollars(50))) {
@@ -29,6 +24,17 @@ public class BusinessSite extends GenericSite {
 		}
 		result = result.plus(base);
 		result = result.round(2);
+		return result;
+	}
+
+	private Dollars getDollarsFromUsage(int usage) {
+		Dollars result;
+		double t1 = START_RATE - ((END_RATE * END_AMOUNT) - START_RATE)
+				/ (END_AMOUNT - 1);
+		double t2 = ((END_RATE * END_AMOUNT) - START_RATE)
+				* Math.min(END_AMOUNT, usage) / (END_AMOUNT - 1);
+		double t3 = Math.max(usage - END_AMOUNT, 0) * END_RATE;
+		result = new Dollars(t1 + t2 + t3);
 		return result;
 	}
 
