@@ -11,6 +11,7 @@ public class ResidentialSite extends TimedSite {
 		super(zone);
 	}
 
+	@Override
 	protected Dollars charge(int usage, Interval interval) {
 		Dollars result = calculateSummerWinterRate(usage, interval);
 

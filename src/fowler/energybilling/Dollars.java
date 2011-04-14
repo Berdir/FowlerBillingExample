@@ -105,7 +105,7 @@ public class Dollars {
 	//c number of decimals to which we want to round
 	public Dollars round(int c) {
 		int temp=(int)((this.amount*Math.pow(10,c)));
-		 this.amount = (double)temp/Math.pow(10,c);
+		 this.amount = temp/Math.pow(10,c);
 		 return this;
 		}
 

@@ -7,6 +7,7 @@ public class BusinessSite extends GenericSite {
 	static final double END_RATE = 0.05;
 	static final int END_AMOUNT = 1000;
 
+	@Override
 	protected Dollars charge(int usage) {
 		if (usage == 0) {
 			return new Dollars(0);
