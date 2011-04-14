@@ -4,8 +4,11 @@ import java.util.Date;
 
 import fowler.energybilling.Dollars;
 import fowler.energybilling.NoReadingsException;
+import fowler.energybilling.Zone;
 
 public abstract class TimedSite extends Site {
+
+	protected Zone _zone;
 
 	public TimedSite() {
 		super();
