@@ -34,12 +34,4 @@ public class DisabilitySite extends TimedSite {
 		return result;
 	}
 
-	protected Dollars calculateSummerWinterRate(int usage, Date start, Date end) {
-		Dollars result;
-		double summerFraction = _zone.getSummerFraction(start, end);
-		result = new Dollars((usage * _zone.getSummerRate() * summerFraction)
-				+ (usage * _zone.getWinterRate() * (1 - summerFraction)));
-		return result;
-	}
-
 }
