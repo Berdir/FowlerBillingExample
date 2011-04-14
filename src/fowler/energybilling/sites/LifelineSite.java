@@ -9,10 +9,10 @@ public class LifelineSite extends GenericSite {
 	protected Dollars charge (int usage) {
  		double base = Math.min(usage,100) * 0.03;
 		if (usage > 100) {
-		base += (Math.min (usage,200) - 100) * 0.05;
+			base += (Math.min (usage,200) - 100) * 0.05;
 		}
 		if (usage > 200) {
-		base += (usage - 200) * 0.07;
+			base += (usage - 200) * 0.07;
 		}
 		Dollars result = new Dollars(base);
 		result = result.minus(new Dollars(8)).max(new Dollars(0));
@@ -23,6 +23,5 @@ public class LifelineSite extends GenericSite {
 		result = result.plus(fuelCharge.times(TAX_RATE));
 		result = result.round(2);
 		return result;
-		}
-
+	}
 }
