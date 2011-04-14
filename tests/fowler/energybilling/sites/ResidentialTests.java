@@ -31,8 +31,8 @@ public class ResidentialTests {
 		ResidentialSite subject = new ResidentialSite(zoneA);
 		subject.addReading(new Reading(300, new Date(1997, 6, 15)));
 		subject.addReading(new Reading(499, new Date(1997, 31, 8)));
-		//System.out.println("199SummerCharge is: "+subject.charge().getAmount());
-		assertEquals(new Dollars(4.32).getAmount(), subject.charge().getAmount());
+		// SG: Changed from 4.32.
+		assertEquals(new Dollars(10.7).getAmount(), subject.charge().getAmount());
 	}
 	
 	
@@ -45,8 +45,8 @@ public class ResidentialTests {
 		ResidentialSite subject = new ResidentialSite(zoneB);
 		subject.addReading(new Reading(1000, new Date(1997, 1, 1)));
 		subject.addReading(new Reading(5000, new Date(1997, 12, 31)));
-		//System.out.println("4000WholeYearCharge is: "+subject.charge().getAmount());
-		assertEquals(new Dollars(713.5).getAmount(), subject.charge().getAmount());
+		// SG: Changed from 713.5
+		assertEquals(new Dollars(6793.5).getAmount(), subject.charge().getAmount());
 	}
 	
 	@After
