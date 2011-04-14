@@ -17,11 +17,10 @@ public class LifelineSite extends GenericSite {
 		Dollars result = new Dollars(base);
 		result = result.minus(new Dollars(8)).max(new Dollars(0));
 		Dollars tax = result.times(TAX_RATE);
-		result = result.plus(tax);
+		result.plus(tax);
 		Dollars fuelCharge = new Dollars(usage * 0.0175);
-		result = result.plus(fuelCharge);
-		result = result.plus(fuelCharge.times(TAX_RATE));
-		result = result.round(2);
+		result.plus(fuelCharge.times(1 + TAX_RATE));
+		result.round(2);
 		return result;
 	}
 }
