@@ -7,6 +7,7 @@ import fowler.energybilling.Zone;
 
 public class ResidentialSite extends TimedSite {
 
+	private static final double FUEL = 0.0175;
 	private static final double TAX_RATE = 0.05;
 	public ResidentialSite(Zone zone) {
 		super(zone);
@@ -15,14 +16,11 @@ public class ResidentialSite extends TimedSite {
 	protected Dollars charge(int usage, Date start, Date end) {
 		Dollars result = calculateSummerWinterRate(usage, start, end);
 		
-		result = result.plus(new Dollars(result.times(TAX_RATE))); 
-		
-		Dollars fuel = new Dollars(usage * 0.0175);
-		result = result.plus(fuel);
-		
-		result = new Dollars(result.plus(fuel.times(TAX_RATE))); 
-		
-		result = result.round(2);
-		return result;
+		// @todo This is weird, figure out what this actually does.
+		result = result.plus(result.times(TAX_RATE)); 
+
+		return result
+			.plus(new Dollars(usage * FUEL).times(1 + TAX_RATE))
+			.round(2);
 	}
 }
