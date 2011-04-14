@@ -21,14 +21,13 @@ public class BusinessSite extends GenericSite {
 	private Dollars calculcateBaseDollars(int usage, Dollars result) {
 		result = result.plus(new Dollars(usage * 0.0175));
 		Dollars base = result.min(new Dollars(50)).times(0.07);
-		
+
 		if (result.isGreaterThan(new Dollars(50))) {
-			base = base.plus(result.min(new Dollars(75))
-					.minus(new Dollars(50)).times(0.06));
+			base = base.plus(result.min(new Dollars(75)).minus(new Dollars(50))
+					.times(0.06));
 		}
 		if (result.isGreaterThan(new Dollars(75))) {
-			base = base.plus(result.minus(new Dollars(75)).times(
-					0.05));
+			base = base.plus(result.minus(new Dollars(75)).times(0.05));
 		}
 		result = result.plus(base);
 		return result;

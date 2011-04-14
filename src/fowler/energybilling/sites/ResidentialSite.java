@@ -16,7 +16,7 @@ public class ResidentialSite extends TimedSite {
 		Dollars result = calculateSummerWinterRate(usage, interval);
 
 		// SG: This is what is was imho meant to be calculcated.
-	 	// The original code line resulted in times(TAX_RATE * 2) instead.
+		// The original code line resulted in times(TAX_RATE * 2) instead.
 		result.times(1 + TAX_RATE);
 
 		result.plus(new Dollars(usage * FUEL).times(1 + TAX_RATE));

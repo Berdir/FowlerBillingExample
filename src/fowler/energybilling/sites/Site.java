@@ -27,36 +27,36 @@ public class Site {
 
 	/**
 	 * Add a new reading.
-	 *
+	 * 
 	 * @param newReading
 	 */
 	public void addReading(Reading newReading) {
 		_readings.add(newReading);
 	}
-	
+
 	/**
 	 * Return the most recent reading.
-	 *
-	 * @return
-	 *  The most recent Reading instance.
-	 *
-	 * @throws NoReadingsException 
+	 * 
+	 * @return The most recent Reading instance.
+	 * 
+	 * @throws NoReadingsException
 	 */
 	protected Reading getRecentReading() throws NoReadingsException {
 		return getRecentReading(0);
 	}
-	
+
 	/**
 	 * Return the n-th recent reading.
-	 *
-	 * @param reverseKey Which reading should be returned, 
-	 *                   0 is the most recent, 1 the second most recent and so on.  
-	 * @return
-	 *   The n-th most recent Reading, as requested.
-	 *
-	 * @throws NoReadingsException 
+	 * 
+	 * @param reverseKey
+	 *            Which reading should be returned, 0 is the most recent, 1 the
+	 *            second most recent and so on.
+	 * @return The n-th most recent Reading, as requested.
+	 * 
+	 * @throws NoReadingsException
 	 */
-	protected Reading getRecentReading(int reverseKey) throws NoReadingsException {
+	protected Reading getRecentReading(int reverseKey)
+			throws NoReadingsException {
 		try {
 			return _readings.get(_readings.size() - (reverseKey + 1));
 		} catch (ArrayIndexOutOfBoundsException e) {

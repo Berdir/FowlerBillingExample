@@ -3,37 +3,42 @@ package fowler.energybilling;
 import org.joda.time.DateTime;
 
 public class Zone {
-	private String 	name;
-	private DateTime 	summerEnd;
-	private DateTime 	summerStart;
-	private double 	winterRate;
-	private double 	summerRate;
+	private String name;
+	private DateTime summerEnd;
+	private DateTime summerStart;
+	private double winterRate;
+	private double summerRate;
 
-
-	public  Zone(String name, double summerRate, double winterRate, DateTime summerStart, DateTime summerEnd) {
+	public Zone(String name, double summerRate, double winterRate,
+			DateTime summerStart, DateTime summerEnd) {
 		this.name = name;
 		this.summerRate = summerRate;
 		this.winterRate = winterRate;
 		this.summerStart = summerStart;
 		this.summerEnd = summerEnd;
 	};
+
 	public DateTime getSummerEnd() {
 		return summerEnd;
 	}
+
 	public DateTime getSummerStart() {
 		return summerStart;
 	}
+
 	public double getWinterRate() {
 		return winterRate;
 	}
+
 	public double getSummerRate() {
 		return summerRate;
 	}
-	
-	public String getName(){
+
+	public String getName() {
 		return this.name;
-		
+
 	}
+
 	/**
 	 * @param start
 	 * @param end
@@ -54,16 +59,17 @@ public class Zone {
 			if (start.isBefore(getSummerStart())
 					|| start.isAfter(getSummerEnd())) {
 				// end is in the summer
-				summerDays = end.getDayOfYear() - getSummerStart().getDayOfYear() + 1;
+				summerDays = end.getDayOfYear()
+						- getSummerStart().getDayOfYear() + 1;
 			} else {
 				// start is in summer
-				summerDays = getSummerEnd().getDayOfYear() - start.getDayOfYear() + 1;
+				summerDays = getSummerEnd().getDayOfYear()
+						- start.getDayOfYear() + 1;
 			}
-			summerFraction = summerDays / end.getDayOfYear() - start.getDayOfYear() + 1;
+			summerFraction = summerDays / end.getDayOfYear()
+					- start.getDayOfYear() + 1;
 		}
 		return summerFraction;
 	}
 
 }
-	
-	

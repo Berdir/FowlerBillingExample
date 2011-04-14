@@ -24,7 +24,7 @@ public abstract class TimedSite extends Site {
 			DateTime start = getRecentReading(1).date();
 
 			start = start.plusDays(1);
-			
+
 			Interval interval = new Interval(start, end);
 			return charge(getRecentUsage(), interval);
 		} catch (NoReadingsException e) {
@@ -34,7 +34,8 @@ public abstract class TimedSite extends Site {
 
 	protected Dollars calculateSummerWinterRate(int usage, Interval interval) {
 		Dollars result;
-		double summerFraction = _zone.getSummerFraction(interval.getStart(), interval.getStart());
+		double summerFraction = _zone.getSummerFraction(interval.getStart(),
+				interval.getStart());
 		result = new Dollars((usage * _zone.getSummerRate() * summerFraction)
 				+ (usage * _zone.getWinterRate() * (1 - summerFraction)));
 		return result;

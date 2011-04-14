@@ -1,35 +1,34 @@
 package fowler.energybilling;
 
 /*Martin Fowler: The dollars class is a use of the Quantity pattern. It combines the
-notion of an amount and a currency. I'm not going to go into too many
-details here. Essentially you create dollars objects with a constructor
-that has a number for the amount. The class supports some basic arithmetic
-operations.
-An important part of the dollars class is the fact that it rounds all numbers
-to the nearest cent, a behavior which is often very important in
-financial systems. As my friend Ron Jeffries told me: "Be kind to pennies,
-and they will be kind to you".
-JK: just added a round method that is invoked at the end of each charge method
-*/
+ notion of an amount and a currency. I'm not going to go into too many
+ details here. Essentially you create dollars objects with a constructor
+ that has a number for the amount. The class supports some basic arithmetic
+ operations.
+ An important part of the dollars class is the fact that it rounds all numbers
+ to the nearest cent, a behavior which is often very important in
+ financial systems. As my friend Ron Jeffries told me: "Be kind to pennies,
+ and they will be kind to you".
+ JK: just added a round method that is invoked at the end of each charge method
+ */
 
 public class Dollars {
 	double amount;
 	String currency;
-	
-	public Dollars(){
+
+	public Dollars() {
 		this.amount = 0.0;
 		this.currency = "USD";
-		}
+	}
 
-	
-	public Dollars(double amount){
+	public Dollars(double amount) {
 		this.amount = amount;
 		this.currency = "USD";
-		}
+	}
 
 	public Dollars(Dollars dollar) {
 		this.amount = dollar.amount;
-		this.currency = dollar.currency;		
+		this.currency = dollar.currency;
 	}
 
 	public Dollars plus(Dollars dollars) {
@@ -41,21 +40,17 @@ public class Dollars {
 		return amount;
 	}
 
-
 	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
-
 
 	public String getCurrency() {
 		return currency;
 	}
 
-
 	public void setCurrency(String currency) {
 		this.currency = currency;
 	}
-
 
 	public Dollars times(double taxRate) {
 		this.amount = this.amount * taxRate;
@@ -66,9 +61,7 @@ public class Dollars {
 		this.amount -= dollars.amount;
 		return this;
 	}
-	
-	
-	
+
 	public Dollars max(Dollars dollars) {
 		Dollars result;
 		if (this.amount <= dollars.amount) {
@@ -76,10 +69,8 @@ public class Dollars {
 		} else {
 			result = this;
 		}
-			return result;
+		return result;
 	}
-		
-		
 
 	public Dollars min(Dollars dollars) {
 		Dollars result;
@@ -88,35 +79,35 @@ public class Dollars {
 		} else {
 			result = dollars;
 		}
-			return result;
+		return result;
 	}
 
 	public boolean isGreaterThan(Dollars dollars) {
 		boolean result;
-		if(this.amount >= dollars.amount){
-			result= true;}
-		else{
+		if (this.amount >= dollars.amount) {
+			result = true;
+		} else {
 			result = false;
 		}
 		return result;
 	}
-	
 
-	//c number of decimals to which we want to round
+	// c number of decimals to which we want to round
 	public Dollars round(int c) {
-		int temp=(int)((this.amount*Math.pow(10,c)));
-		 this.amount = temp/Math.pow(10,c);
-		 return this;
-		}
+		int temp = (int) ((this.amount * Math.pow(10, c)));
+		this.amount = temp / Math.pow(10, c);
+		return this;
+	}
 
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof Dollars) {
-			return amount == ((Dollars)obj).amount;
+			return amount == ((Dollars) obj).amount;
 		}
 		return false;
 	}
