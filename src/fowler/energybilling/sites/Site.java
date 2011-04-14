@@ -1,8 +1,6 @@
 package fowler.energybilling.sites;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 import fowler.energybilling.NoReadingsException;
 import fowler.energybilling.Reading;

@@ -1,26 +1,26 @@
 package fowler.energybilling;
 
-import java.util.Date;
+import org.joda.time.DateTime;
 
 public class Zone {
 	private String 	name;
-	private Date 	summerEnd;
-	private Date 	summerStart;
+	private DateTime 	summerEnd;
+	private DateTime 	summerStart;
 	private double 	winterRate;
 	private double 	summerRate;
 
 
-	public  Zone(String name, double summerRate, double winterRate, Date summerStart, Date summerEnd) {
+	public  Zone(String name, double summerRate, double winterRate, DateTime summerStart, DateTime summerEnd) {
 		this.name = name;
 		this.summerRate = summerRate;
 		this.winterRate = winterRate;
 		this.summerStart = summerStart;
 		this.summerEnd = summerEnd;
 	};
-	public Date getSummerEnd() {
+	public DateTime getSummerEnd() {
 		return summerEnd;
 	}
-	public Date getSummerStart() {
+	public DateTime getSummerStart() {
 		return summerStart;
 	}
 	public double getWinterRate() {
@@ -39,33 +39,28 @@ public class Zone {
 	 * @param end
 	 * @return
 	 */
-	public double getSummerFraction(Date start, Date end) {
+	public double getSummerFraction(DateTime start, DateTime end) {
 		double summerFraction;
 		// Find out how much of period is in the summer
-		if (start.after(getSummerEnd()) || end.before(getSummerStart()))
+		if (start.isAfter(getSummerEnd()) || end.isBefore(getSummerStart()))
 			summerFraction = 0;
-		else if (!start.before(getSummerStart())
-				&& !start.after(getSummerEnd())
-				&& !end.before(getSummerStart())
-				&& !end.after(getSummerEnd()))
+		else if (!start.isBefore(getSummerStart())
+				&& !start.isAfter(getSummerEnd())
+				&& !end.isBefore(getSummerStart())
+				&& !end.isAfter(getSummerEnd()))
 			summerFraction = 1;
 		else { // part in summer part in winter
 			double summerDays;
-			if (start.before(getSummerStart())
-					|| start.after(getSummerEnd())) {
+			if (start.isBefore(getSummerStart())
+					|| start.isAfter(getSummerEnd())) {
 				// end is in the summer
-				summerDays = DateHelper.dayOfYear(end) - DateHelper.dayOfYear(getSummerStart())
-						+ 1;
+				summerDays = end.getDayOfYear() - getSummerStart().getDayOfYear() + 1;
 			} else {
 				// start is in summer
-				summerDays = DateHelper.dayOfYear(getSummerEnd()) - DateHelper.dayOfYear(start)
-						+ 1;
+				summerDays = getSummerEnd().getDayOfYear() - start.getDayOfYear() + 1;
 			}
-			;
-			summerFraction = summerDays
-					/ (DateHelper.dayOfYear(end) - DateHelper.dayOfYear(start) + 1);
+			summerFraction = summerDays / end.getDayOfYear() - start.getDayOfYear() + 1;
 		}
-		;
 		return summerFraction;
 	}
 

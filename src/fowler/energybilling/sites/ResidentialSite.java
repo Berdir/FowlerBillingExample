@@ -1,6 +1,6 @@
 package fowler.energybilling.sites;
 
-import java.util.Date;
+import org.joda.time.Interval;
 
 import fowler.energybilling.Dollars;
 import fowler.energybilling.Zone;
@@ -11,8 +11,8 @@ public class ResidentialSite extends TimedSite {
 		super(zone);
 	}
 
-	protected Dollars charge(int usage, Date start, Date end) {
-		Dollars result = calculateSummerWinterRate(usage, start, end);
+	protected Dollars charge(int usage, Interval interval) {
+		Dollars result = calculateSummerWinterRate(usage, interval);
 
 		// SG: This is what is was imho meant to be calculcated.
 	 	// The original code line resulted in times(TAX_RATE * 2) instead.

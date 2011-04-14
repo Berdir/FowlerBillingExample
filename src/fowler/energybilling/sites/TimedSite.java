@@ -1,6 +1,7 @@
 package fowler.energybilling.sites;
 
-import java.util.Date;
+import org.joda.time.DateTime;
+import org.joda.time.Interval;
 
 import fowler.energybilling.Dollars;
 import fowler.energybilling.NoReadingsException;
@@ -15,26 +16,28 @@ public abstract class TimedSite extends Site {
 		_zone = zone;
 	}
 
-	protected abstract Dollars charge(int fullUsage, Date start, Date end);
+	protected abstract Dollars charge(int fullUsage, Interval interval);
 
 	public Dollars charge() {
 		try {
-			Date end = getRecentReading().date();
-			Date start = getRecentReading(1).date();
-			start.setDate(start.getDate() + 1); // set to beginning of period
-			return charge(getRecentUsage(), start, end);
+			DateTime end = getRecentReading().date();
+			DateTime start = getRecentReading(1).date();
+
+			start = start.plusDays(1);
+			
+			Interval interval = new Interval(start, end);
+			return charge(getRecentUsage(), interval);
 		} catch (NoReadingsException e) {
 			return new Dollars(0);
 		}
 	}
 
-	protected Dollars calculateSummerWinterRate(int usage, Date start,
-			Date end) {
-				Dollars result;
-				double summerFraction = _zone.getSummerFraction(start, end);
-				result = new Dollars((usage * _zone.getSummerRate() * summerFraction)
-						+ (usage * _zone.getWinterRate() * (1 - summerFraction)));
-				return result;
-			}
+	protected Dollars calculateSummerWinterRate(int usage, Interval interval) {
+		Dollars result;
+		double summerFraction = _zone.getSummerFraction(interval.getStart(), interval.getStart());
+		result = new Dollars((usage * _zone.getSummerRate() * summerFraction)
+				+ (usage * _zone.getWinterRate() * (1 - summerFraction)));
+		return result;
+	}
 
 }
