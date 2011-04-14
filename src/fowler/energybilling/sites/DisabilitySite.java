@@ -24,9 +24,7 @@ public class DisabilitySite extends TimedSite {
 		// JK: don't charge more than the CAP (which is set to 200)
 		int usage = Math.min(fullUsage, CAP);
 		
-		double summerFraction = _zone.getSummerFraction(start, end);
-		result = new Dollars((usage * _zone.getSummerRate() * summerFraction)
-				+ (usage * _zone.getWinterRate() * (1 - summerFraction)));
+		result = calculateSummerWinterRate(start, end, usage);
 		// if the full usage is below the cap the max yields zero
 		result = result
 				.plus(new Dollars(Math.max(fullUsage - usage, 0) * 0.062));
@@ -36,6 +34,14 @@ public class DisabilitySite extends TimedSite {
 		result = result.plus(fuel);
 		result = new Dollars(result.plus(fuel.times(TAX_RATE).min(FUEL_TAX_CAP)));
 		result = result.round(2);
+		return result;
+	}
+
+	protected Dollars calculateSummerWinterRate(Date start, Date end, int usage) {
+		Dollars result;
+		double summerFraction = _zone.getSummerFraction(start, end);
+		result = new Dollars((usage * _zone.getSummerRate() * summerFraction)
+				+ (usage * _zone.getWinterRate() * (1 - summerFraction)));
 		return result;
 	}
 
